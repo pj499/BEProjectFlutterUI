@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "923159034835",
+    "firebase_url": "https://official-document-repository.firebaseio.com",
+    "project_id": "official-document-repository",
+    "storage_bucket": "official-document-repository.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923159034835:android:3dc2bc9681a3d198888d26",
+        "android_client_info": {
+          "package_name": "com.example.official_file_repository"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923159034835-t583eibvsq5voh2nnov8npdhbg7ritkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRq7-Cx0dCtYfS70bOoT2ojFvPVIjwj14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923159034835-t583eibvsq5voh2nnov8npdhbg7ritkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
