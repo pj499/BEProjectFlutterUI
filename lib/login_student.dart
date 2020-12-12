@@ -1,9 +1,9 @@
-import 'package:audioplayers/audio_cache.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-import 'teacher_dashboard.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'student_dashboard.dart';
 
 // void main() => runApp(MyApp());
 
@@ -19,12 +19,14 @@ import 'teacher_dashboard.dart';
 //   }
 // }
 
-class TeacherLoginPage extends StatefulWidget {
+class MyLoginPage extends StatefulWidget {
   @override
-  _TeacherLoginPageState createState() => _TeacherLoginPageState();
+  _MyLoginPageState createState() => _MyLoginPageState();
 }
 
-class _TeacherLoginPageState extends State<TeacherLoginPage> {
+class _MyLoginPageState extends State<MyLoginPage> {
+  final textcontrol1 = TextEditingController();
+  final textcontrol2 = TextEditingController();
   bool showProgress = false;
   final _auth = FirebaseAuth.instance;
   String email;
@@ -32,7 +34,6 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         title: Text("Login Page"),
         backgroundColor: Colors.teal[300],
@@ -51,6 +52,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                 height: 20.0,
               ),
               TextField(
+                controller: textcontrol1,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -66,6 +68,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                 height: 20.0,
               ),
               TextField(
+                controller: textcontrol2,
                 obscureText: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -86,28 +89,28 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                 borderRadius: BorderRadius.circular(32.0),
                 child: MaterialButton(
                   onPressed: () async {
+                    textcontrol1.clear();
+                    textcontrol2.clear();
                     final player = AudioCache();
                     player.play('click.wav');
-
                     setState(() {
                       showProgress = true;
                     });
                     try {
-                      final user = _auth.signInWithEmailAndPassword(
+                      final user = await _auth.signInWithEmailAndPassword(
                           email: email, password: password);
-                      if (user != null) {}
+                      if (user != null) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return StudentDashboardPage();
+                        }));
+                      }
                       setState(() {
                         showProgress = false;
                       });
                     } catch (e) {
                       print(e);
                     }
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TeacherDashboardPage()),
-                    );
                   },
                   minWidth: 200.0,
                   height: 45.0,

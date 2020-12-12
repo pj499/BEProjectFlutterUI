@@ -1,9 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(TeacherDashboardPage());
-}
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class TeacherDashboardPage extends StatefulWidget {
   @override
@@ -11,6 +9,26 @@ class TeacherDashboardPage extends StatefulWidget {
 }
 
 class _TeacherDashboardPageState extends State<TeacherDashboardPage> {
+  final _auth = auth.FirebaseAuth.instance;
+  auth.User loggedInUser;
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +37,14 @@ class _TeacherDashboardPageState extends State<TeacherDashboardPage> {
         backgroundColor: Colors.teal[50],
         appBar: AppBar(
           centerTitle: true,
+          actions: [
+            IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  _auth.signOut();
+                  Navigator.pop(context);
+                })
+          ],
           backgroundColor: Colors.teal,
           title: Text(
             'Exam Section Dashboard',

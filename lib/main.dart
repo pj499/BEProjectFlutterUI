@@ -1,10 +1,9 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-import 'student_registration.dart';
-import 'teacher_registration.dart';
+import 'registration_student.dart';
+import 'registration_teacher.dart';
 
 void main() {
   runApp(HomePage());
@@ -48,16 +47,16 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Builder(
         builder: (context) => Scaffold(
-          backgroundColor: Colors.teal[50],
+          backgroundColor: Colors.blue,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.orange,
             title: Text(
-              'WELCOME !',
+              'HOME',
               style: TextStyle(
                 fontFamily: 'Source Sans Pro',
                 fontSize: 30.0,
-                letterSpacing: 1.5,
+                letterSpacing: 2.5,
               ),
             ),
           ),
@@ -72,8 +71,6 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 200.0),
                     GestureDetector(
                       onTap: () {
-                        final player = AudioCache();
-                        player.play('click.wav');
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
@@ -129,8 +126,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        final player = AudioCache();
-                        player.play('click.wav');
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -166,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       highlightElevation: 0.0,
                       child: Text(
-                        'STUDENT',
+                        'FOR STUDENTS',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

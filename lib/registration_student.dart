@@ -1,9 +1,10 @@
-import 'package:audioplayers/audio_cache.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-import 'student_login.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'login_student.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'login_student.dart';
 
 //void main() => runApp(MyApp());
 
@@ -24,7 +25,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final textcontrol1 = TextEditingController();
+  final textcontrol2 = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  //final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String email;
   String password;
   bool showProgress = false;
@@ -32,7 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         title: Center(
           child: Text("Registration Page"),
@@ -53,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 20.0,
               ),
               TextField(
+                controller: textcontrol1,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -62,12 +66,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     hintText: "Enter your Email",
                     prefixIcon: Icon(Icons.email),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)))),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(32.0)))),
               ),
               SizedBox(
                 height: 20.0,
               ),
               TextField(
+                controller: textcontrol2,
                 obscureText: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -77,7 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     hintText: "Enter your Password",
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)))),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(32.0)))),
               ),
               SizedBox(
                 height: 20.0,
@@ -88,6 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(32.0),
                 child: MaterialButton(
                   onPressed: () async {
+                    textcontrol1.clear();
+                    textcontrol2.clear();
                     setState(() {
                       showProgress = true;
                     });
@@ -118,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 45.0,
                   child: Text(
                     "Register",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: 20.0),
                   ),
                 ),
               ),
@@ -139,6 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(32.0),
                 child: MaterialButton(
                   onPressed: () {
+                    textcontrol1.clear();
+                    textcontrol2.clear();
                     final player = AudioCache();
                     player.play('click.wav');
                     Navigator.push(
@@ -153,8 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 45.0,
                   child: Text(
                     "Go to Login",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: 20.0),
                   ),
                 ),
               ),
